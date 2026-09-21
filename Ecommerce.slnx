@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Services/" />
+  <Folder Name="/Services/Basket/">
+    <Project Path="Services/Basket/Basket.API/Basket.API.csproj" Id="542f2829-d64d-403d-b2c3-4ebf34311308" />
+    <Project Path="Services/Basket/Basket.Application/Basket.Application.csproj" Id="171b81d7-26d4-4add-92ce-bd31d42aecda" />
+    <Project Path="Services/Basket/Basket.Core/Basket.Core.csproj" Id="fad54442-27af-4fc8-a841-53b34bde8d81" />
+    <Project Path="Services/Basket/Basket.Infrastructure/Basket.Infrastructure.csproj" Id="f55a6d89-94fa-45fb-bad6-98c5879096ae" />
+  </Folder>
+  <Folder Name="/Services/Catalog/">
+    <Project Path="Services/Catalog/Catalog.API/Catalog.API.csproj" />
+    <Project Path="Services/Catalog/Catalog.Application/Catalog.Application.csproj" Id="1f88db60-a2a8-4bca-9690-cc531ac13366" />
+    <Project Path="Services/Catalog/Catalog.Core/Catalog.Core.csproj" Id="5c867775-154d-4caf-9268-b92e04ef73a2" />
+    <Project Path="Services/Catalog/Catalog.Infrastructure/Catalog.Infrastructure.csproj" Id="ea93bd15-8ab3-4028-84ad-411c0393668f" />
+  </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+</Solution>
