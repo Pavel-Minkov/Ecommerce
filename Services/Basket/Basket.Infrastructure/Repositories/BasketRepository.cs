@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Basket.Infrastructure.Repositories
 {
-    internal class BasketRepository(IDistributedCache redisCache) : IBasketRepository
+    public class BasketRepository(IDistributedCache redisCache) : IBasketRepository
     {
         private readonly IDistributedCache _redisCache = redisCache;
 
@@ -27,7 +27,7 @@ namespace Basket.Infrastructure.Repositories
             return JsonConvert.DeserializeObject<ShoppingCart>(basket);
         }
 
-        public async Task<ShoppingCart> UpdateInsertBasket(ShoppingCart basket)
+        public async Task<ShoppingCart> UpsertBasket(ShoppingCart basket)
         {
             await _redisCache.SetStringAsync(basket.UserName, JsonConvert.SerializeObject(basket));
             return await GetBasket(basket.UserName);
