@@ -3,9 +3,6 @@ using Catalog.Application.Queries;
 using Catalog.Application.Responses;
 using Catalog.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Catalog.Application.Handlers
 {
