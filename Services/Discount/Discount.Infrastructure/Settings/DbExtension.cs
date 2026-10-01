@@ -1,4 +1,4 @@
-﻿using Grpc.Core.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -10,18 +10,19 @@ namespace Discount.Infrastructure.Settings
         public static IHost MigrateDatabase(this IHost host) {
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
-            var logger = services.GetRequiredService<ILogger>();
+            var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+            var logger = loggerFactory.CreateLogger("DbMigration");
             var databaseSettings = services.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 
             try
             {
-                logger.Info("Discount database migration started");
+                logger.LogInformation("Discount database migration started");
                 ApplyMigration(databaseSettings.ConnectionString);
-                logger.Info("Discount database migration completed");
+                logger.LogInformation("Discount database migration completed");
             }
             catch (Exception ex)
             {
-                logger.Error(ex, "Error occurred while migrating Discount database");
+                logger.LogError(ex, "Error occurred while migrating Discount database");
                 throw;
             }
 

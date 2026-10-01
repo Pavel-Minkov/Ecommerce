@@ -1,4 +1,5 @@
 ﻿using Basket.Application.Commands;
+using Basket.Application.GrpcService;
 using Basket.Application.Mappers;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
@@ -7,12 +8,19 @@ using MediatR;
 
 namespace Basket.Application.Handlers
 {
-    public class CreateShoppingCartHandler(IBasketRepository basketRepository) : IRequestHandler<CreateShoppingCartCommand, ShoppingCartResponse>
+    public class CreateShoppingCartHandler(IBasketRepository basketRepository, DiscountGrpcService discountGrpcService) : IRequestHandler<CreateShoppingCartCommand, ShoppingCartResponse>
     {
         private readonly IBasketRepository basketRepository = basketRepository;
+        private readonly DiscountGrpcService discountGrpcService = discountGrpcService;
 
         public async Task<ShoppingCartResponse> Handle(CreateShoppingCartCommand request, CancellationToken cancellationToken)
         {
+            // Apply discount to each item in the shopping cart using Grpc call to Discount service
+            foreach (var item in request.Items)
+            {
+                var discount = await discountGrpcService.GetDiscount(item.ProductName);
+                item.Price -= discount.Amount;
+            }
             var shoppingCart = request.ToEntity();
             var createdShoppingCart = await basketRepository.UpsertBasket(shoppingCart);
             return createdShoppingCart.ToResponse();
