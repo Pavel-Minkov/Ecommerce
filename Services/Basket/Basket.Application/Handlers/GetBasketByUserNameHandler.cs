@@ -8,8 +8,6 @@ namespace Basket.Application.Handlers
 {
     public class GetBasketByUserNameHandler(IBasketRepository basketRepository) : IRequestHandler<GetBasketByUserNameQuery, ShoppingCartResponse>
     {
-        private readonly IBasketRepository basketRepository = basketRepository;
-
         public async Task<ShoppingCartResponse> Handle(GetBasketByUserNameQuery request, CancellationToken cancellationToken)
         {
             var basket = await basketRepository.GetBasket(request.UserName);

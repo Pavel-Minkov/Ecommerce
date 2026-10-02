@@ -10,8 +10,6 @@ namespace Basket.API.Controllers
     [Route("api/v1/[controller]")]
     public class BasketController(IMediator mediatR) : ControllerBase
     {
-        private readonly IMediator mediatR = mediatR;
-
         //Get api/v1/basket/{userName}
         [HttpGet("{userName}")]
         public async Task<ActionResult<ShoppingCartDto>> GetBasket(string userName)

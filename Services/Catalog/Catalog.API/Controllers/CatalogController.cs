@@ -13,13 +13,11 @@ namespace Catalog.API.Controllers
     [Route("api/v1/[controller]")]
     public class CatalogController(IMediator mediator) : Controller
     {
-        private readonly IMediator _mediator = mediator;
-
         [HttpGet("GetAllProducts")]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProducts([FromQuery] CatalogSpecParams catalogSpecParams) 
         {
             var query = new GetAllProductsQuery(catalogSpecParams);
-            var result = await _mediator.Send(query);
+            var result = await mediator.Send(query);
             return Ok(result);
         }
 
@@ -27,7 +25,7 @@ namespace Catalog.API.Controllers
         public async Task<ActionResult<ProductDTO>> GetProduct(string Id) 
         {
             var query = new GetProductByIdQuery(Id);
-            var result = await _mediator.Send(query);
+            var result = await mediator.Send(query);
             return Ok(result);
         }
 
@@ -35,7 +33,7 @@ namespace Catalog.API.Controllers
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductByName(string productName)
         {
             var query = new GetProductByNameQuery(productName);
-            var result = await _mediator.Send(query);
+            var result = await mediator.Send(query);
             if (result == null || !result.Any())
             {
                 return NotFound();
@@ -48,7 +46,7 @@ namespace Catalog.API.Controllers
         public async Task<ActionResult<ProductDTO>> CreateProduct([FromBody] CreateProductDTO createProductDTO)
         {
             var command = createProductDTO.ToCommand();
-            var result = await _mediator.Send(command);
+            var result = await mediator.Send(command);
             return Ok(result);
         }
 
@@ -56,7 +54,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> DeleteProduct(string Id)
         {
             var command = new DeleteProductCommand(Id);
-            var result = await _mediator.Send(command);
+            var result = await mediator.Send(command);
             return result ? NoContent() : NotFound();
         }
 
@@ -64,7 +62,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> UpdateProduct(string Id, UpdateProductDTO updateProductDto)
         {
             var command = updateProductDto.ToCommand(Id);
-            var result = await _mediator.Send(command);
+            var result = await mediator.Send(command);
             return result ? NoContent() : NotFound();
         }
 
@@ -72,7 +70,7 @@ namespace Catalog.API.Controllers
         public async Task<ActionResult<IEnumerable<BrandDTO>>> GetBrands()
         {
             var query = new GetAllBrandsQuery();
-            var result = _mediator.Send(query);
+            var result = await mediator.Send(query);
             return Ok(result);
         }
 
@@ -80,7 +78,7 @@ namespace Catalog.API.Controllers
         public async Task<ActionResult<IEnumerable<TypeDTO>>> GetTypes() 
         {
             var query = new GetAllTypesQuery();
-            var result = _mediator.Send(query);
+            var result = await mediator.Send(query);
             return Ok(result);
         }
 
@@ -88,7 +86,7 @@ namespace Catalog.API.Controllers
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByBrandName(string brand)
         {
             var query = new GetProductByNameQuery(brand);
-            var result = _mediator.Send(query);
+            var result = await mediator.Send(query);
             return Ok(result);
         }
     }

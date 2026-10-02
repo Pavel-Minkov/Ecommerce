@@ -6,8 +6,6 @@ namespace Discount.Application.Handlers
 {
     public class DeleteDiscountHandler(IDiscountRepository discountRepository) : IRequestHandler<DeleteDiscountCommand, bool>
     {
-        private readonly IDiscountRepository discountRepository = discountRepository;
-
         public async Task<bool> Handle(DeleteDiscountCommand request, CancellationToken cancellationToken)
         {
             

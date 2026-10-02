@@ -9,8 +9,6 @@ namespace Discount.Application.Handlers
 {
     public class GetDiscountHandler(IDiscountRepository discountRepository) : IRequestHandler<GetDiscountQuery, CouponDto>
     {
-        private readonly IDiscountRepository discountRepository = discountRepository;
-
         public async Task<CouponDto> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(request.ProductName))

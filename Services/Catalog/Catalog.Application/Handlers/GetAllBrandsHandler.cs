@@ -8,11 +8,10 @@ namespace Catalog.Application.Handlers
 {
     public class GetAllBrandsHandler(IBrandRepository brandRepository) : IRequestHandler<GetAllBrandsQuery, IList<BrandResponse>>
     {
-        private readonly IBrandRepository _brandRepository = brandRepository;
 
         public async Task<IList<BrandResponse>> Handle(GetAllBrandsQuery request, CancellationToken cancellationToken)
         {
-            var brandList = await _brandRepository.GetAllBrandsAsync();
+            var brandList = await brandRepository.GetAllBrandsAsync();
             return brandList.ToResponseList();
         }
     }

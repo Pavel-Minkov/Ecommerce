@@ -8,11 +8,9 @@ namespace Catalog.Application.Handlers
 {
     public class GetProductByIdHandler(IProductRepository productRepository) : IRequestHandler<GetProductByIdQuery, ProductResponse>
     {
-        private readonly IProductRepository _productRepository = productRepository;
-
         public async Task<ProductResponse> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.GetProductAsync(request.productId);
+            var product = await productRepository.GetProductAsync(request.productId);
             return product.ToResponse();
         }
     }

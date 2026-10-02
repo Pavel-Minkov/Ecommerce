@@ -9,8 +9,6 @@ namespace Discount.API.Services
 {
     public class DiscountService(IMediator mediator) : DiscountProtoService.DiscountProtoServiceBase
     {
-        private readonly IMediator mediator = mediator;
-
         public override async Task<CouponModel> GetDiscount(GetDiscountRequest request, ServerCallContext context)
         {
             var query = new GetDiscountQuery(request.ProductName);

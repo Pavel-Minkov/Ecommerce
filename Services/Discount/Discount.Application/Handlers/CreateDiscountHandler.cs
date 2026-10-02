@@ -10,8 +10,6 @@ namespace Discount.Application.Handlers
 {
     public class CreateDiscountHandler(IDiscountRepository discountRepository) : IRequestHandler<CreateDiscountCommand, CouponDto>
     {
-        private readonly IDiscountRepository discountRepository = discountRepository;
-
         public async Task<CouponDto> Handle(CreateDiscountCommand request, CancellationToken cancellationToken)
         {
             var validationErrors = new Dictionary<string, string>();
