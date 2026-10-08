@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Catalog.Application.Queries
 {
-    public record GetProductsByBrandQuery(string BrandName) : IRequest<IList<ProductResponse>>;
+    public record GetProductsByBrandQuery(string BrandName) : IRequest<IReadOnlyList<ProductResponse>>;
 }

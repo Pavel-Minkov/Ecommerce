@@ -18,7 +18,7 @@ namespace Catalog.Infrastructure.Repositories
             _types = database.GetCollection<ProductType>(settings.TypeCollectionName);
         }
 
-        public async Task<IEnumerable<ProductType>> GetAllTypesAsync()
+        public async Task<IReadOnlyList<ProductType>> GetAllTypesAsync()
         {
             return await _types.Find(_ => true).ToListAsync();
         }

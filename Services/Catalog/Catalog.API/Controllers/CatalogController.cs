@@ -14,7 +14,7 @@ namespace Catalog.API.Controllers
     public class CatalogController(IMediator mediator) : Controller
     {
         [HttpGet("GetAllProducts")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProducts([FromQuery] CatalogSpecParams catalogSpecParams) 
+        public async Task<ActionResult<IReadOnlyList<ProductDTO>>> GetAllProducts([FromQuery] CatalogSpecParams catalogSpecParams) 
         {
             var query = new GetAllProductsQuery(catalogSpecParams);
             var result = await mediator.Send(query);
@@ -30,7 +30,7 @@ namespace Catalog.API.Controllers
         }
 
         [HttpGet("productName/{productName}")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductByName(string productName)
+        public async Task<ActionResult<IReadOnlyList<ProductDTO>>> GetProductByName(string productName)
         {
             var query = new GetProductByNameQuery(productName);
             var result = await mediator.Send(query);
@@ -38,7 +38,7 @@ namespace Catalog.API.Controllers
             {
                 return NotFound();
             }
-            IEnumerable<ProductDTO> dtoList = [.. result.Select(p => p.ToDto())];
+            IReadOnlyList<ProductDTO> dtoList = [.. result.Select(p => p.ToDto())];
             return Ok(dtoList);
         }
 
@@ -67,7 +67,7 @@ namespace Catalog.API.Controllers
         }
 
         [HttpGet("GetAllBrands")]
-        public async Task<ActionResult<IEnumerable<BrandDTO>>> GetBrands()
+        public async Task<ActionResult<IReadOnlyList<BrandDTO>>> GetBrands()
         {
             var query = new GetAllBrandsQuery();
             var result = await mediator.Send(query);
@@ -75,7 +75,7 @@ namespace Catalog.API.Controllers
         }
 
         [HttpGet("GetAllTypes")]
-        public async Task<ActionResult<IEnumerable<TypeDTO>>> GetTypes() 
+        public async Task<ActionResult<IReadOnlyList<TypeDTO>>> GetTypes() 
         {
             var query = new GetAllTypesQuery();
             var result = await mediator.Send(query);
@@ -83,7 +83,7 @@ namespace Catalog.API.Controllers
         }
 
         [HttpGet("/brand/{brand}", Name = "GetProductsByBrandName")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByBrandName(string brand)
+        public async Task<ActionResult<IReadOnlyList<ProductDTO>>> GetProductsByBrandName(string brand)
         {
             var query = new GetProductByNameQuery(brand);
             var result = await mediator.Send(query);

@@ -35,7 +35,7 @@ namespace Catalog.Infrastructure.Repositories
             return deleted_product.IsAcknowledged && deleted_product.DeletedCount > 0;
         }
 
-        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        public async Task<IReadOnlyList<Product>> GetAllProductsAsync()
         {
             return await _products.Find(_ => true).ToListAsync();
         }
@@ -50,12 +50,12 @@ namespace Catalog.Infrastructure.Repositories
             return await _products.Find(p => p.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductByBrandAsync(string brandName)
+        public async Task<IReadOnlyList<Product>> GetProductByBrandAsync(string brandName)
         {
             return await _products.Find(p => p.Brand.Name.ToLower() == brandName.ToLower()).ToListAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductByNameAsync(string name)
+        public async Task<IReadOnlyList<Product>> GetProductByNameAsync(string name)
         {
             var filter = Builders<Product>.Filter.Regex(p => p.Name, new BsonRegularExpression($".*{name}.*", "i"));
             return await _products.Find(filter).ToListAsync();

@@ -29,7 +29,7 @@ namespace Catalog.Application.Mappers
         public static Pagination<ProductResponse> ToResponse(this Pagination<Product> pagination)
             => new(pagination.PageIndex, pagination.PageSize, pagination.Count, [.. pagination.Items.Select(p => p.ToResponse())]);
 
-        public static IEnumerable<ProductResponse> ToResponseList(this IEnumerable<Product> products) => products.Select(ToResponse);
+        public static IReadOnlyList<ProductResponse> ToResponseList(this IReadOnlyList<Product> products) => [.. products.Select(ToResponse)];
 
         public static Product ToEntity(this CreateProductCommand command, ProductBrand brand, ProductType type)
         {

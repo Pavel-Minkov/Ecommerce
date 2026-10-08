@@ -6,9 +6,9 @@ using MediatR;
 
 namespace Catalog.Application.Handlers
 {
-    public class GetProductsByBrandHandler(IProductRepository productRepository) : IRequestHandler<GetProductsByBrandQuery, IEnumerable<ProductResponse>>
+    public class GetProductsByBrandHandler(IProductRepository productRepository) : IRequestHandler<GetProductsByBrandQuery, IReadOnlyList<ProductResponse>>
     {
-        public async Task<IEnumerable<ProductResponse>> Handle(GetProductsByBrandQuery request, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<ProductResponse>> Handle(GetProductsByBrandQuery request, CancellationToken cancellationToken)
         {
             var productList = await productRepository.GetProductByBrandAsync(request.BrandName);
             return productList.ToResponseList();

@@ -1,6 +1,8 @@
 ﻿using Catalog.Application.Commands;
+using Catalog.Application.Exceptions;
 using Catalog.Application.Mappers;
 using Catalog.Application.Responses;
+using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using MediatR;
 
@@ -14,7 +16,7 @@ namespace Catalog.Application.Handlers
             var type = await productRepository.GetTypeByIdAsync(request.TypeId);
             if (brand == null || type == null)
             {
-                throw new ArgumentException("Invalid brand or type");
+                throw new CustomNotFoundException(brand == null ? nameof(ProductBrand) : nameof(ProductType), brand == null ? request.BrandId : request.TypeId);
             }
             var productEntity = request.ToEntity(brand, type);
             var newProduct = await productRepository.CreateProductAsync(productEntity);

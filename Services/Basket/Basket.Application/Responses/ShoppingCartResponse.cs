@@ -3,7 +3,7 @@
     public record ShoppingCartResponse
     {
         public string UserName { get; init; }
-        public IEnumerable<ShoppingCartItemResponse> Items { get; init; }
+        public IReadOnlyList<ShoppingCartItemResponse> Items { get; init; }
         public decimal TotalPrice => Items.Sum(item => item.Price * item.Quantity);
 
         public ShoppingCartResponse()
@@ -17,7 +17,7 @@
             
         }
 
-        public ShoppingCartResponse(string userName, IEnumerable<ShoppingCartItemResponse> items)
+        public ShoppingCartResponse(string userName, IReadOnlyList<ShoppingCartItemResponse> items)
         {
             UserName = userName ?? string.Empty;
             Items = items ?? [];
