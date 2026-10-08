@@ -11,5 +11,6 @@ indent_size = 2
 [*.cs]
 dotnet_diagnostic.RS0062.severity = error
 dotnet_diagnostic.MA0143.severity = error
-# Disable the ConfigureAwait warning (CA2007) because ASP.NET Core has no SynchronizationContext
+# Disable the ConfigureAwait warning (MA0004) because ASP.NET Core has no SynchronizationContext
 dotnet_diagnostic.MA0004.severity = none
+dotnet_diagnostic.MA0048.severity = none

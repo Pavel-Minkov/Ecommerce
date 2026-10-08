@@ -1,6 +1,6 @@
 ﻿namespace Basket.Application.DTOs
 {
-    public record ShoppingCartDto(string UserName, IEnumerable<ShoppingCartItemDto> Items, decimal TotalPrice);
+    public record ShoppingCartDto(string UserName, IReadOnlyList<ShoppingCartItemDto> Items, decimal TotalPrice);
 
     public record ShoppingCartItemDto(string ProductId, string ProductName, string ImageFile, decimal Price, int Quantity);
 

@@ -10,6 +10,6 @@ namespace Catalog.Application.Mappers
     {
         public static BrandResponse ToResponse(this ProductBrand brand) => new(brand.Id, brand.Name);
 
-        public static List<BrandResponse> ToResponseList(this IEnumerable<ProductBrand> brands) => [.. brands.Select(b => b.ToResponse())];
+        public static IReadOnlyList<BrandResponse> ToResponseList(this IReadOnlyList<ProductBrand> brands) => [.. brands.Select(b => b.ToResponse())];
     }
 }

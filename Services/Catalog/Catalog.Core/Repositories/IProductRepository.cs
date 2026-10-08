@@ -5,10 +5,10 @@ namespace Catalog.Core.Repositories
 {
     public interface IProductRepository
     {
-        Task<IEnumerable<Product>> GetAllProductsAsync();
+        Task<IReadOnlyList<Product>> GetAllProductsAsync();
         Task<Pagination<Product>> GetProductsAsync(CatalogSpecParams catalogSpecParams);
-        Task<IEnumerable<Product>> GetProductByNameAsync(string name);
-        Task<IEnumerable<Product>> GetProductByBrandAsync(string brandName);
+        Task<IReadOnlyList<Product>> GetProductByNameAsync(string name);
+        Task<IReadOnlyList<Product>> GetProductByBrandAsync(string brandName);
         Task<Product> GetProductAsync(string id);
         Task<Product> CreateProductAsync(Product product);
         Task<bool> UpdateProductAsync(Product product);

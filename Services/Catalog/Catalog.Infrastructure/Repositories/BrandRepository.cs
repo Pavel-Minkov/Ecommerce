@@ -17,7 +17,7 @@ namespace Catalog.Infrastructure.Repositories
             var database = client.GetDatabase(settings.DatabaseName);
             _brands = database.GetCollection<ProductBrand>(settings.BrandCollectionName);
         }
-        public async Task<IEnumerable<ProductBrand>> GetAllBrandsAsync()
+        public async Task<IReadOnlyList<ProductBrand>> GetAllBrandsAsync()
         {
             return await _brands.Find(_ => true).ToListAsync();
         }

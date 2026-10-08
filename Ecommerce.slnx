@@ -18,6 +18,12 @@
     <Project Path="Services/Discount/Discount.Core/Discount.Core.csproj" Id="237a6d9d-cbc9-4f3d-820e-54138ecce081" />
     <Project Path="Services/Discount/Discount.Infrastructure/Discount.Infrastructure.csproj" Id="a4474380-a830-44d3-ae47-1e4a8738855d" />
   </Folder>
+  <Folder Name="/Services/Ordering/">
+    <Project Path="Services/Ordering/Ordering.API/Ordering.API.csproj" Id="a575dba9-3c1b-446b-a044-a053c37bf57a" />
+    <Project Path="Services/Ordering/Ordering.Application/Ordering.Application.csproj" Id="3f0332dd-8de5-4fde-b91a-c7a5ae2d410a" />
+    <Project Path="Services/Ordering/Ordering.Core/Ordering.Core.csproj" Id="5bbe9078-0a71-42be-afe3-7466f0e1b58e" />
+    <Project Path="Services/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj" Id="a33f599a-2ffb-43a6-b754-841f832ff319" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>

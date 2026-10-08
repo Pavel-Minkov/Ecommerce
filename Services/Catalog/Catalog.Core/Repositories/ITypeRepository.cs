@@ -4,7 +4,7 @@ namespace Catalog.Core.Repositories
 {
     public interface ITypeRepository
     {
-        Task<IEnumerable<ProductType>> GetAllTypesAsync();
+        Task<IReadOnlyList<ProductType>> GetAllTypesAsync();
         Task<ProductType> GetTypeAsync(string id);
     }
 }

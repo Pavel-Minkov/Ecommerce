@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Catalog.Application.Queries
 {
-    public record GetAllTypesQuery : IRequest<List<TypeResponse>>
+    public record GetAllTypesQuery : IRequest<IReadOnlyList<TypeResponse>>
     {
     }
 }
