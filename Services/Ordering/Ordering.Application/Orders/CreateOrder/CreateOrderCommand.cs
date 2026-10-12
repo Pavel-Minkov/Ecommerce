@@ -16,5 +16,6 @@ namespace Ordering.Application.Orders.CreateOrder
         string? CardNumber,
         string? Expiration,
         string? Cvv,
-        int? PaymentMethod) : ICommand<int>;
+        int? PaymentMethod,
+        Guid CorrelationId) : ICommand<int>;
 }

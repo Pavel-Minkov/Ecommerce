@@ -6,10 +6,13 @@ services:
    image: redis:alpine
 
   discountdb:
-   image: postgres
+   image: postgres:17-alpine
 
   orderdb:
     image: mcr.microsoft.com/mssql/server:2022-latest
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
 
   catalog:
    image: ${DOCKER_REGISTRY-}catalog
@@ -28,6 +31,12 @@ services:
     build:
       context: .
       dockerfile: Services/Discount/Discount.API/Dockerfile
+
+  ordering:
+    image: ${DOCKER_REGISTRY-}ordering
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
 
 volumes:
   mongo_data:

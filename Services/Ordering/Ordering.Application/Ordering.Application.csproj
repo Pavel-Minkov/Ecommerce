@@ -13,9 +13,12 @@
          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
      </PackageReference>
      <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.12" />
+     <PackageReference Include="MassTransit" Version="8.5.11" />
+     <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.11" />
     </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\EventBus.Messages\EventBus.Messages.csproj" />
     <ProjectReference Include="..\Ordering.Core\Ordering.Core.csproj" />
   </ItemGroup>
 

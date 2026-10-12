@@ -1,6 +1,8 @@
 ﻿using Basket.Application.Commands;
+using Basket.Application.DTOs;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
+using EventBus.Messages.Events;
 
 namespace Basket.Application.Mappers
 {
@@ -61,6 +63,43 @@ namespace Basket.Application.Mappers
                     ProductName = item.ProductName
                 })]
             };
+        }
+
+        public static ShoppingCart ToEntity(this ShoppingCartResponse response)
+        {
+            return new ShoppingCart(response.UserName)
+            {
+                Items = [.. response.Items.Select(item => new ShoppingCartItem
+                        {
+                            ProductId = item.ProductId,
+                            ProductName = item.ProductName,
+                            Price = item.Price,
+                            Quantity = item.Quantity,
+                        }
+                    ),
+                ],
+            };
+        }
+
+        public static BasketCheckoutEvent ToBasketCheckoutEvent(this BasketCheckoutDto dto, ShoppingCart basket)
+        {
+            return new BasketCheckoutEvent
+            (
+                dto.UserName,
+                basket.Items.Sum(item => item.Price * item.Quantity),
+                dto.FirstName,
+                dto.LastName,
+                dto.EmailAddress,
+                dto.AddressLine,
+                dto.Country,
+                dto.State,
+                dto.ZipCode,
+                dto.CardName,
+                dto.CardNumber,
+                dto.Expiration,
+                dto.Cvv,
+                dto.PaymentMethod
+            );
         }
     }
 }

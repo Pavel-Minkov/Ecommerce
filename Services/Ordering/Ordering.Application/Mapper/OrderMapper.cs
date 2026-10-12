@@ -1,6 +1,7 @@
 ﻿//using EventBus.Messages.Events;
 //using Newtonsoft.Json;
 //using Ordering.Application.Constants;
+using EventBus.Messages.Events;
 using Ordering.Application.DTOs;
 using Ordering.Application.Orders.CreateOrder;
 using Ordering.Application.Orders.UpdateOrder;
@@ -68,7 +69,8 @@ namespace Ordering.Application.Mapper
                 dto.CardNumber,
                 dto.Expiration,
                 dto.Cvv,
-                dto.PaymentMethod);
+                dto.PaymentMethod,
+                Guid.Empty);
         }
 
         public static UpdateOrderCommand ToCommand(this OrderDto dto)
@@ -91,27 +93,27 @@ namespace Ordering.Application.Mapper
                 dto.PaymentMethod);
         }
 
-        //public static CreateOrderCommand ToCheckoutOrderCommand(this BasketCheckoutEvent message)
-        //{
-        //    return new CreateOrderCommand
-        //    {
-        //        UserName = message.UserName!,
-        //        TotalPrice = message.TotalPrice ?? 0,
-        //        FirstName = message.FirstName!,
-        //        LastName = message.LastName!,
-        //        EmailAddress = message.EmailAddress!,
-        //        AddressLine = message.AddressLine!,
-        //        Country = message.Country!,
-        //        State = message.State!,
-        //        ZipCode = message.ZipCode!,
-        //        CardName = message.CardName!,
-        //        CardNumber = message.CardNumber!,
-        //        Expiration = message.Expiration!,
-        //        Cvv = message.Cvv!,
-        //        PaymentMethod = message.PaymentMethod ?? 0,
-        //        CorrelationId = message.CorrelationId,
-        //    };
-        //}
+        public static CreateOrderCommand ToCheckoutOrderCommand(this BasketCheckoutEvent message)
+        {
+            return new CreateOrderCommand
+            (
+                message.UserName!,
+                message.TotalPrice ?? 0,
+                message.FirstName!,
+                message.LastName!,
+                message.EmailAddress!,
+                message.AddressLine!,
+                message.Country!,
+                message.State!,
+                message.ZipCode!,
+                message.CardName!,
+                message.CardNumber!,
+                message.Expiration!,
+                message.Cvv!,
+                message.PaymentMethod ?? 0,
+                message.CorrelationId
+            );
+        }
         //public static OutboxMessage ToOutboxMessage(Order order, Guid correlationId)
         //{
         //    return new OutboxMessage

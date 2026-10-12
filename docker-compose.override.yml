@@ -23,9 +23,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin"]
+      test: ["CMD-SHELL", "pg_isready -U admin -d DiscountDb"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -46,6 +46,12 @@ services:
       timeout: 10s
       retries: 3
 
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
   catalog:
     environment:
@@ -66,8 +72,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CacheSettings__ConnectionString=basketdb:6379"
       - "GrpcSettings__DiscountUrl=http://discount:8080"
+      - "EventBusSettings__HostAddress=amqp://rabbitmq:5672"
     depends_on:
       - basketdb
+      - rabbitmq
     ports:
       - "8001:8080"
 
@@ -79,3 +87,14 @@ services:
        - discountdb          
     ports:
       - "8002:8080"
+
+  ordering:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=StrongPassword123!;TrustServerCertificate=True;Encrypt=True;"     
+      - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672/"
+    depends_on:
+      - orderdb
+      - rabbitmq 
+    ports:
+      - "8003:8080"

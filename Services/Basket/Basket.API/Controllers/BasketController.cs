@@ -27,11 +27,17 @@ namespace Basket.API.Controllers
         }
 
         [HttpDelete("{userName}")]
-        public async Task<ActionResult> DeleteBasket(string userName)
+        public async Task<IActionResult> DeleteBasket(string userName)
         {
-            var command = new DeleteBasketByUserNameCommand(userName);
-            await mediatR.Send(command);
+            await mediatR.Send(new DeleteBasketByUserNameCommand(userName));
             return Ok();
+        }
+
+        [HttpPost("Checkout")]
+        public async Task<IActionResult> Checkout([FromBody] BasketCheckoutDto dto)
+        {
+            await mediatR.Send(new BasketCheckoutCommand(dto));
+            return Accepted();
         }
     }
 }
