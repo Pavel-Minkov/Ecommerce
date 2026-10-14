@@ -1,6 +1,8 @@
 using EventBus.Messages.Common;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using Ordering.API.Extensions;
+using Ordering.Application.Dispatcher;
 using Ordering.Application.EventBusConsumer;
 using Ordering.Infrastructure.Data;
 
@@ -17,6 +19,9 @@ builder.Services.AddSwaggerGen();
 //Add Ordering services
 builder.Services.AddOrderingServices(builder.Configuration);
 
+//Add OutboxMessageDispatcher as a hosted service
+builder.Services.AddHostedService<OutboxMessageDispatcher>();
+
 //Add MassTransit
 builder.Services.AddMassTransit(config =>
 {
@@ -32,12 +37,14 @@ builder.Services.AddMassTransit(config =>
 });
 
 var app = builder.Build();
-
-await app.MigrateDatabaseAsync<OrderContext>(async (context, services) =>
+if (!EF.IsDesignTime)
 {
-    var logger = services.GetService<ILogger<OrderContextSeed>>();
-    await OrderContextSeed.SeedAsync(context, logger);
-});
+    await app.MigrateDatabaseAsync<OrderContext>(async (context, services) =>
+    {
+        var logger = services.GetService<ILogger<OrderContextSeed>>();
+        await OrderContextSeed.SeedAsync(context, logger);
+    });
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

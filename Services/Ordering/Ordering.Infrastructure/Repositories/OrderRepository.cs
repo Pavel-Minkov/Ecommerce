@@ -11,5 +11,10 @@ namespace Ordering.Infrastructure.Repositories
         {
             return await base.orderContext.Orders.Where(o => o.UserName == userName).AsNoTracking().ToListAsync();
         }
+        public async Task AddOutboxMessageAsync(OutboxMessage outboxMessage)
+        {
+            await orderContext.OutboxMessages.AddAsync(outboxMessage);
+            await orderContext.SaveChangesAsync();
+        }
     }
 }

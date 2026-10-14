@@ -5,5 +5,6 @@ namespace Ordering.Core.Repositories
     public interface IOrderRepository : IAsyncRepository<Order>
     {
         Task<IReadOnlyList<Order>> GetOrdersByUserNameAsync(string userName);
+        Task AddOutboxMessageAsync(OutboxMessage outboxMessage);
     }
 }

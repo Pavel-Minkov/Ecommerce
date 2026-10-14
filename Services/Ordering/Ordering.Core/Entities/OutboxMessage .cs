@@ -9,5 +9,6 @@
         public DateTime? ProcessedOn { get; set; }
         public bool IsProcessed => ProcessedOn.HasValue;
         public string? Error { get; set; }
+        public int RetryCount { get; set; } = 0;
     }
 }
