@@ -2,7 +2,9 @@
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/EventBus.Messages/EventBus.Messages.csproj" Id="975edc66-94bb-448f-931d-a0592794a9f4" />
   </Folder>
-  <Folder Name="/Services/" />
+  <Folder Name="/Services/">
+    <Project Path="Services/Identity/Identity/Identity.csproj" Id="e2f6f72c-e94e-49d9-8e97-7e575312dbd5" />
+  </Folder>
   <Folder Name="/Services/Basket/">
     <Project Path="Services/Basket/Basket.API/Basket.API.csproj" Id="542f2829-d64d-403d-b2c3-4ebf34311308" />
     <Project Path="Services/Basket/Basket.Application/Basket.Application.csproj" Id="171b81d7-26d4-4add-92ce-bd31d42aecda" />
