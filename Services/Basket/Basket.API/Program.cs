@@ -4,9 +4,11 @@ using Basket.Application.Settings;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Repositories;
 using Basket.Infrastructure.Settings;
+using Common.Logging;
 using Discount.Grpc.Protos;
 using MassTransit;
 using Microsoft.Extensions.Options;
+using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,6 +58,7 @@ builder.Services.AddMassTransit(config =>
     });
 });
 
+builder.Host.UseSerilog(Logging.ConfigureLogging);
 
 var app = builder.Build();
 

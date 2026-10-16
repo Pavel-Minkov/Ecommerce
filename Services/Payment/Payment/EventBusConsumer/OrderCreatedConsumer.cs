@@ -21,7 +21,7 @@ namespace Payment.Consumer
                     CorrelationId = message.CorrelationId,
                 };
                 await publishEndpoint.Publish(completedEvent);
-                logger.LogInformation("Payment successful for order: {OrderId} and correlation ID: {CorrelationId}", message.Id, message.CorrelationId);
+                logger.LogInformation("Payment successful for order: {@OrderId} and correlation ID: {@CorrelationId}", message.Id, message.CorrelationId);
             }
             else
             {
@@ -32,7 +32,7 @@ namespace Payment.Consumer
                     Reason = "Payment amount must be greater than zero."
                 };
                 await publishEndpoint.Publish(failedEvent);
-                logger.LogInformation("Payment failed for order: {OrderId} and correlation ID: {CorrelationId}", message.Id, message.CorrelationId);
+                logger.LogInformation("Payment failed for order: {@OrderId} and correlation ID: {@CorrelationId}", message.Id, message.CorrelationId);
             }
         }
     }

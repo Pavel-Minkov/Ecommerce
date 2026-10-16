@@ -5,10 +5,11 @@ using Basket.Application.Responses;
 using Basket.Core.Entities;
 using Basket.Core.Repositories;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Basket.Application.Handlers
 {
-    public class CreateShoppingCartHandler(IBasketRepository basketRepository, DiscountGrpcService discountGrpcService) : IRequestHandler<CreateShoppingCartCommand, ShoppingCartResponse>
+    public class CreateShoppingCartHandler(IBasketRepository basketRepository, DiscountGrpcService discountGrpcService, ILogger<CreateShoppingCartHandler> logger) : IRequestHandler<CreateShoppingCartCommand, ShoppingCartResponse>
     {
         public async Task<ShoppingCartResponse> Handle(CreateShoppingCartCommand request, CancellationToken cancellationToken)
         {
@@ -20,6 +21,7 @@ namespace Basket.Application.Handlers
             }
             var shoppingCart = request.ToEntity();
             var createdShoppingCart = await basketRepository.UpsertBasket(shoppingCart);
+            logger.LogInformation("Shopping cart created for user {@UserName}", createdShoppingCart.UserName);
             return createdShoppingCart.ToResponse();
         }
     }

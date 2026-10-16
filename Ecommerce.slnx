@@ -1,5 +1,9 @@
 <Solution>
+  <Folder Name="/ApiGateway/">
+    <Project Path="ApiGateway/ApiGateway/ApiGateway.csproj" Id="90e08d64-6ea7-43be-8208-2236b7cd523b" />
+  </Folder>
   <Folder Name="/Infrastructure/">
+    <Project Path="Infrastructure/Common.Logging/Common.Logging.csproj" Id="fa86ae94-8363-4467-a4a6-1386343ed4bb" />
     <Project Path="Infrastructure/EventBus.Messages/EventBus.Messages.csproj" Id="975edc66-94bb-448f-931d-a0592794a9f4" />
   </Folder>
   <Folder Name="/Services/">

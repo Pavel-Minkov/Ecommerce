@@ -25,7 +25,7 @@ namespace Identity.Controllers
                 LastName = registerDto.LastName
             };
             var result = await userManager.CreateAsync(user, registerDto.Password);
-            logger.LogInformation("User registration attempt for {Email}. Result: {Result}", registerDto.Email, result.Succeeded ? "Success" : "Failure");
+            logger.LogInformation("User registration attempt for {@Email}. Result: {@Result}", registerDto.Email, result.Succeeded ? "Success" : "Failure");
             if (result.Succeeded)
             {
                 return Ok(new { message = "User registered successfully." });
@@ -40,7 +40,7 @@ namespace Identity.Controllers
             if (user != null && await userManager.CheckPasswordAsync(user, loginDto.Password))
             {
                 var token = GenerateJwtToken(user);
-                logger.LogInformation("User {Email} logged in successfully.", loginDto.Email);
+                logger.LogInformation("User {@Email} logged in successfully.", loginDto.Email);
                 return Ok(new { token });
             }
             logger.LogWarning("Failed login attempt for {Email}.", loginDto.Email);
@@ -63,7 +63,7 @@ namespace Identity.Controllers
                 claims: claims,
                 expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(configuration["Jwt:Duration"])),
                 signingCredentials: creds);
-            logger.LogInformation("JWT token generated for user {Email}.", user.Email);
+            logger.LogInformation("JWT token generated for user {@Email}.", user.Email);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }

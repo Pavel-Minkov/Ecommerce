@@ -11,10 +11,10 @@ namespace Ordering.Application.EventBusConsumer
     {
         public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
         {
-            using var scope = logger.BeginScope("Consuming BasketCheckoutEvent for: {CorrelationId}", context.Message.CorrelationId);
+            using var scope = logger.BeginScope("Consuming BasketCheckoutEvent for: {@CorrelationId}", context.Message.CorrelationId);
             var command = context.Message.ToCheckoutOrderCommand();
             var orderId = await createOrderHandler.Handle(command, context.CancellationToken);
-            logger.LogInformation("BasketCheckoutEvent consumed successfully! Order created with ID: {OrderId}", orderId);
+            logger.LogInformation("BasketCheckoutEvent consumed successfully! Order created with ID: {@OrderId}", orderId);
         }
     }
 }

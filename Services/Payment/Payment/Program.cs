@@ -1,6 +1,8 @@
+using Common.Logging;
 using EventBus.Messages.Common;
 using MassTransit;
 using Payment.Consumer;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,8 @@ builder.Services.AddMassTransit(config =>
         });
     });
 });
+
+builder.Host.UseSerilog(Logging.ConfigureLogging);
 
 var app = builder.Build();
 

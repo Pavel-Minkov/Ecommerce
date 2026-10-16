@@ -7,12 +7,13 @@ using MediatR;
 
 namespace Discount.API.Services
 {
-    public class DiscountService(IMediator mediator) : DiscountProtoService.DiscountProtoServiceBase
+    public class DiscountService(IMediator mediator, ILogger<DiscountService> logger) : DiscountProtoService.DiscountProtoServiceBase
     {
         public override async Task<CouponModel> GetDiscount(GetDiscountRequest request, ServerCallContext context)
         {
             var query = new GetDiscountQuery(request.ProductName);
             var couponDto = await mediator.Send(query);
+            logger.LogInformation("Discount retrieved for Product Name: {@ProductName}", request.ProductName);
             return couponDto.ToModel();
         }
 
@@ -20,6 +21,7 @@ namespace Discount.API.Services
         {
             var command = new CreateDiscountCommand(request.Coupon.ProductName, request.Coupon.Description, request.Coupon.Amount);
             var couponDto = await mediator.Send(command);
+            logger.LogInformation("Discount created for Product Name: {@ProductName}", request.Coupon.ProductName);
             return couponDto.ToModel();
         }
 
@@ -28,6 +30,7 @@ namespace Discount.API.Services
             var coupon = request.Coupon;
             var command = new UpdateDiscountCommand(coupon.Id,coupon.ProductName, coupon.Description, coupon.Amount);
             var couponDto = await mediator.Send(command);
+            logger.LogInformation("Discount updated for Product Name: {@ProductName}", coupon.ProductName);
             return couponDto.ToModel();
         }
 
@@ -35,6 +38,7 @@ namespace Discount.API.Services
         {
             var command = new DeleteDiscountCommand(request.ProductName);
             var result = await mediator.Send(command);
+            logger.LogInformation("Discount deleted for Product Name: {@ProductName}", request.ProductName);
             return new DeleteDiscountResponse { Success = result };
         }
     }

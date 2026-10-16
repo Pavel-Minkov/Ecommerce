@@ -19,7 +19,7 @@ namespace Basket.Application.Handlers
             }
             var basket = basketResponse.ToEntity();
             var evt = basketDto.ToBasketCheckoutEvent(basket);
-            logger.LogInformation("Publishing BasketCheckoutEvent for user {UserName}", basket.UserName);
+            logger.LogInformation("Publishing BasketCheckoutEvent for user {@UserName}", basket.UserName);
             await publishEndpoint.Publish(evt, cancellationToken);
             await mediator.Send(new DeleteBasketByUserNameCommand(basket.UserName), cancellationToken);
             return Unit.Value;

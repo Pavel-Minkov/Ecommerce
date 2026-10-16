@@ -1,9 +1,11 @@
+using Common.Logging;
 using Identity.Data;
 using Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -48,6 +50,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Host.UseSerilog(Logging.ConfigureLogging);
 
 var app = builder.Build();
 

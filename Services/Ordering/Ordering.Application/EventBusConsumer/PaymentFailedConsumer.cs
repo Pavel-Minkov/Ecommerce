@@ -13,12 +13,12 @@ namespace Ordering.Application.EventBusConsumer
             var order = await orderRepository.GetByIdAsync(message.OrderId);
             if (order == null)
             {
-                logger.LogWarning("Order not found for Order Id: {OrderId} and Correlation Id: {CorrelationId}", message.OrderId, message.CorrelationId);
+                logger.LogWarning("Order not found for Order Id: {@OrderId} and Correlation Id: {@CorrelationId}", message.OrderId, message.CorrelationId);
                 return;
             }
             order.Status = OrderStatus.Failed;
             await orderRepository.UpdateAsync(order);
-            logger.LogWarning("Order status updated to Failed for Order Id: {OrderId} and Correlation Id: {CorrelationId}", message.OrderId, message.CorrelationId);
+            logger.LogWarning("Order status updated to Failed for Order Id: {@OrderId} and Correlation Id: {@CorrelationId}", message.OrderId, message.CorrelationId);
         }
     }
 }

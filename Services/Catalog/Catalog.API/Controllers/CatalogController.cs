@@ -11,13 +11,15 @@ namespace Catalog.API.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class CatalogController(IMediator mediator) : Controller
+    public class CatalogController(IMediator mediator, ILogger<CatalogController> logger) : Controller
     {
         [HttpGet("GetAllProducts")]
         public async Task<ActionResult<IReadOnlyList<ProductDTO>>> GetAllProducts([FromQuery] CatalogSpecParams catalogSpecParams) 
         {
             var query = new GetAllProductsQuery(catalogSpecParams);
             var result = await mediator.Send(query);
+            logger.LogInformation("Retrieve all products with {@filter}.", catalogSpecParams);
+
             return Ok(result);
         }
 

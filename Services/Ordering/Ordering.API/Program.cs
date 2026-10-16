@@ -1,3 +1,4 @@
+using Common.Logging;
 using EventBus.Messages.Common;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using Ordering.API.Extensions;
 using Ordering.Application.Dispatcher;
 using Ordering.Application.EventBusConsumer;
 using Ordering.Infrastructure.Data;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +38,8 @@ builder.Services.AddMassTransit(config =>
         cfg.ReceiveEndpoint(EventBusConstant.PaymentFailedQueue, c => c.ConfigureConsumer<PaymentFailedConsumer>(ctx));
     });
 });
+
+builder.Host.UseSerilog(Logging.ConfigureLogging);
 
 var app = builder.Build();
 if (!EF.IsDesignTime)
