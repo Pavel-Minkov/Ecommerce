@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Aspire\Ecommerce.ServiceDefaults\Ecommerce.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\Common.Logging\Common.Logging.csproj" />
     <ProjectReference Include="..\Basket.Application\Basket.Application.csproj" />
     <ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj" />

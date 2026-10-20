@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Aspire\Ecommerce.ServiceDefaults\Ecommerce.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\Common.Logging\Common.Logging.csproj" />
   </ItemGroup>
 

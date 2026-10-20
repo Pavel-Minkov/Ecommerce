@@ -10,6 +10,7 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.AddServiceDefaults();
 
 var assemblies = new Assembly[] { Assembly.GetExecutingAssembly(), typeof(CreateDiscountHandler).Assembly };
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));

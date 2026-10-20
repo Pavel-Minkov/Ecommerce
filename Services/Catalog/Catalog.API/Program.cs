@@ -14,6 +14,8 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 //Register Custom Serializers
 BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
 BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));

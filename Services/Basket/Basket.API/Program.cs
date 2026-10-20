@@ -8,12 +8,15 @@ using Common.Logging;
 using Discount.Grpc.Protos;
 using MassTransit;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.AddServiceDefaults();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
