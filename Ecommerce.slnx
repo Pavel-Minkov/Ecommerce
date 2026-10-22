@@ -6,6 +6,16 @@
     <Project Path="Aspire/Eccomerce.Aspire/Eccomerce.Aspire.csproj" Id="6ddf4fbe-af9a-407d-adb9-41b5e9033e28" />
     <Project Path="Aspire/Ecommerce.ServiceDefaults/Ecommerce.ServiceDefaults.csproj" Id="67a2854f-de77-4f91-950b-9b249df4652f" />
   </Folder>
+  <Folder Name="/Deployments/" />
+  <Folder Name="/Deployments/k8s/" />
+  <Folder Name="/Deployments/k8s/catalog-api/">
+    <File Path="Deployments/k8s/catalog/catalog-api/catalog-api.yaml" />
+  </Folder>
+  <Folder Name="/Deployments/k8s/catalog-db/">
+    <File Path="Deployments/k8s/catalog/catalog-db/catalog-db.yaml" />
+    <File Path="Deployments/k8s/catalog/catalog-db/mongo-configmap.yaml" />
+    <File Path="Deployments/k8s/catalog/catalog-db/mongo-secret.yaml" />
+  </Folder>
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/Common.Logging/Common.Logging.csproj" Id="fa86ae94-8363-4467-a4a6-1386343ed4bb" />
     <Project Path="Infrastructure/EventBus.Messages/EventBus.Messages.csproj" Id="975edc66-94bb-448f-931d-a0592794a9f4" />
